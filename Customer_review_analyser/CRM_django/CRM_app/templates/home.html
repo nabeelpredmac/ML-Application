@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" type="text/css" href="http://cdn.pydata.org/bokeh/release/bokeh-1.2.0.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.2.0.min.css"/>
+     <style>
+     </style>
+    <title>CRM</title>
+</head>
+<body> 
+   <h1>Bokeh Grapgh </h1>
+    <form action='/home/' method='POST' name='myform'>
+        <table>
+            <tr>
+                <td>
+                    <label>Item : </label>
+                    <select name = "item" id='item' onchange="this.form.submit()">
+                    {% for c in item %}
+                    <option value="{{ c }}" {% if c == item_s %} selected {% endif %}>{{ c }}</option>
+                    {% endfor %}  
+                     </select>
+                </td>
+                <td>
+                    <label>Category : </label>
+                    <select name = "category1" id='category1' onchange="this.form.submit()">
+                    {% for c in category %}
+                    <option value="{{ c }}" {% if c == category_s %} selected {% endif %}>{{ c }}</option>
+                    {% endfor %}  
+                     </select>
+                </td>
+                <td>
+                    <label>Sentiment : </label>
+                    <select name = "sentiment" id='sentiment' onchange="this.form.submit()">
+                    {% for s in sentiment %}
+                    <option value="{{ s }}" {% if s == sentiment_s %} selected {% endif %}>{{ s }}</option>
+                    {% endfor %}  
+                     </select>
+                </td>
+                <td>
+                    <p><a href="{% url 'logout' %}">logout</a></p>
+                </td>
+            </tr>
+        </table>
+        {% csrf_token %}
+    <table>
+        <tr>
+            <td>
+                {{div| safe}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src= {{ image }} />
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <label>Topic : </label>
+                <select name = "topics" id='topics' onchange="this.form.submit()">
+                {% for c in topics %}
+                <option value="{{ c }}" {% if c == topic_s %} selected {% endif %}>{{ c }}</option>
+                {% endfor %}  
+                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ html_code | safe }}
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+    
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.2.0.min.js"></script>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.2.0.min.js"></script>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.2.0.min.js"></script> 
+    {{script | safe}}
+</html>
